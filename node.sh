@@ -151,14 +151,19 @@ case $NODE_MS in
 			;;
 esac
 #关闭CentOS7的防火墙
-systemctl stop firewalld.service
-systemctl disable firewalld.service
+systemctl stop firewalld
+systemctl disable firewalld
 #iptables
+yum install -y iptables
+yum install iptables-services
+systemctl start iptables.service
+systemctl enable iptables.service
 iptables -F
 iptables -X  
 iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 22:65535 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
+systemctl restart iptables.service
 #开启SS
 cd /root/shadowsocks && chmod +x *.sh
 ./run.sh #后台运行shadowsocks
