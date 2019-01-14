@@ -152,7 +152,9 @@ case $NODE_MS in
 esac
 #关闭CentOS7的防火墙
 systemctl stop firewalld
+systemctl stop firewalld.service
 systemctl disable firewalld
+systemctl disable firewalld.service
 #iptables
 yum install -y iptables
 yum install iptables-services
