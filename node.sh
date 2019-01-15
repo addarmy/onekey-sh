@@ -108,29 +108,32 @@ db(){
 	# 取消文件数量限制
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
-	read -p "请输入你的对接数据库IP(例如:127.0.0.1 如果是本机请直接回车): " MYSQL_HOST
+	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
+	read -p "请输入你的对接数据库IP(例如:127.0.0.1): " MYSQL_HOST
 	read -p "请输入你的数据库名称(默认sspanel):" MYSQL_DB
 	read -p "请输入你的数据库端口(默认3306):" MYSQL_PORT
 	read -p "请输入你的数据库用户名(默认root):" MYSQL_USER
 	read -p "请输入你的数据库密码(默认root):" MYSQL_PASS
-	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
+	read -p "请输入你的单端口混淆参数后缀(默认microsoft.com): " MU_SUFFIX
 	node_install_start
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
 	get_ip
 	sed -i '/API_INTERFACE/c \API_INTERFACE = '\'glzjinmod\''' ${config}
-	MYSQL_HOST=${MYSQL_HOST:-"${ip}"}
+	NODE_ID=${NODE_ID:-"3"}
+	sed -i '/NODE_ID/c \NODE_ID = '${NODE_ID}'' ${config}
+	MYSQL_HOST=${MYSQL_HOST:-"sql.130130.xyz"}
 	sed -i '/MYSQL_HOST/c \MYSQL_HOST = '\'${MYSQL_HOST}\''' ${config}
-	MYSQL_DB=${MYSQL_DB:-"sspanel"}
+	MYSQL_DB=${MYSQL_DB:-"uuyun"}
 	sed -i '/MYSQL_DB/c \MYSQL_DB = '\'${MYSQL_DB}\''' ${config}
-	MYSQL_USER=${MYSQL_USER:-"root"}
+	MYSQL_USER=${MYSQL_USER:-"uuyun"}
 	sed -i '/MYSQL_USER/c \MYSQL_USER = '\'${MYSQL_USER}\''' ${config}
-	MYSQL_PASS=${MYSQL_PASS:-"root"}
+	MYSQL_PASS=${MYSQL_PASS:-"19940820"}
 	sed -i '/MYSQL_PASS/c \MYSQL_PASS = '\'${MYSQL_PASS}\''' ${config}
 	MYSQL_PORT=${MYSQL_PORT:-"3306"}
 	sed -i '/MYSQL_PORT/c \MYSQL_PORT = '${MYSQL_PORT}'' ${config}
-	NODE_ID=${NODE_ID:-"3"}
-	sed -i '/NODE_ID/c \NODE_ID = '${NODE_ID}'' ${config}
+	MU_SUFFIX=${MU_SUFFIX:-"microsoft.com"}
+	sed -i '/MU_SUFFIX/c \MU_SUFFIX = '\'${MU_SUFFIX}\''' ${config}
 }
 clear
 check_system
