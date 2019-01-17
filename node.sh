@@ -161,6 +161,10 @@ yum install -y iptables
 iptables -F
 iptables -X  
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p udp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p udp --dport 443 -j ACCEPT
 iptables -I INPUT -p udp -m tcp --dport 19920:19922 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
