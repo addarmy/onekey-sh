@@ -28,3 +28,9 @@ service sshd restart
 
 BBR/锐速加速<br>
 wget "https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh<br>
+
+DDNS<br>
+curl https://gist.githubusercontent.com/benkulbertis/fff10759c2391b6618dd/raw > /usr/local/bin/cf-ddns.sh && chmod +x /usr/local/bin/cf-ddns.sh<br>
+vi  /usr/local/bin/cf-ddns.sh<br>
+d26875bd7bc3de57a87e3f50779e58c1ec371<br>
+bash /usr/local/bin/cf-ddns.sh<br>
