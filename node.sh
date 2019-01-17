@@ -122,13 +122,13 @@ db(){
 	sed -i '/API_INTERFACE/c \API_INTERFACE = '\'glzjinmod\''' ${config}
 	NODE_ID=${NODE_ID:-"3"}
 	sed -i '/NODE_ID/c \NODE_ID = '${NODE_ID}'' ${config}
-	MYSQL_HOST=${MYSQL_HOST:-"sql.130130.xyz"}
+	MYSQL_HOST=${MYSQL_HOST:-"127.0.0.1"}
 	sed -i '/MYSQL_HOST/c \MYSQL_HOST = '\'${MYSQL_HOST}\''' ${config}
-	MYSQL_DB=${MYSQL_DB:-"uuyun"}
+	MYSQL_DB=${MYSQL_DB:-"sspanel"}
 	sed -i '/MYSQL_DB/c \MYSQL_DB = '\'${MYSQL_DB}\''' ${config}
-	MYSQL_USER=${MYSQL_USER:-"uuyun"}
+	MYSQL_USER=${MYSQL_USER:-"root"}
 	sed -i '/MYSQL_USER/c \MYSQL_USER = '\'${MYSQL_USER}\''' ${config}
-	MYSQL_PASS=${MYSQL_PASS:-"19940820"}
+	MYSQL_PASS=${MYSQL_PASS:-"root"}
 	sed -i '/MYSQL_PASS/c \MYSQL_PASS = '\'${MYSQL_PASS}\''' ${config}
 	MYSQL_PORT=${MYSQL_PORT:-"3306"}
 	sed -i '/MYSQL_PORT/c \MYSQL_PORT = '${MYSQL_PORT}'' ${config}
