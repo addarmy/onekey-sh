@@ -11,7 +11,7 @@ ntpdate time.windows.com<br>
 
 计划任务重启VPS<br>
 安装Crontab(如果需要)<br>
-yum install vixie-cron crontabs
+yum install vixie-cron crontabs<br>
 设置开机启动Crontab<br>
 chkconfig crond on<br>
 启动Crontab<br>
