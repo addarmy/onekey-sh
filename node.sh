@@ -157,11 +157,15 @@ esac
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 #iptables
+yum install -y iptables
 iptables -F
 iptables -X  
-iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
-iptables -I INPUT -p udp -m udp --dport 22:65535 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -I INPUT -p udp -m tcp --dport 19920:19922 -j ACCEPT
+iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
+systemctl start iptables.service
+systemctl enable iptables.service
 #开启SS
 cd /root/shadowsocks && chmod +x *.sh
 ./run.sh #后台运行shadowsocks
