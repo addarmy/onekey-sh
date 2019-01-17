@@ -16,7 +16,7 @@ yum install vixie-cron crontabs<br>
 chkconfig crond on<br>
 启动Crontab<br>
 service crond start<br>
-设置每天凌晨五点自动重启
+设置每天凌晨五点自动重启<br>
 crontab -e<br>
 0 5 * * * /sbin/reboot<br>
 
