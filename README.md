@@ -30,7 +30,13 @@ BBR/锐速加速<br>
 wget "https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh<br>
 
 DDNS<br>
-curl https://gist.githubusercontent.com/benkulbertis/fff10759c2391b6618dd/raw > /usr/local/bin/cf-ddns.sh && chmod +x /usr/local/bin/cf-ddns.sh<br>
-vi  /usr/local/bin/cf-ddns.sh<br>
-d26875bd7bc3de57a87e3f50779e58c1ec371<br>
-bash /usr/local/bin/cf-ddns.sh<br>
+curl https://raw.githubusercontent.com/addarmy/cloudflare_ddns/master/cf-ddns.py > /usr/local/bin/cf-ddns.py && curl https://raw.githubusercontent.com/addarmy/cloudflare_ddns/master/cf-ddns.conf > /usr/local/bin/cf-ddns.conf && chmod +x /usr/local/bin/cf-ddns.py
+
+vi /usr/local/bin/cf-ddns.conf
+
+python /usr/local/bin/cf-ddns.py
+
+crontab -e
+
+*/10 * * * * /usr/local/bin/cf-ddns.py >/dev/null 2>&1<br>
+
