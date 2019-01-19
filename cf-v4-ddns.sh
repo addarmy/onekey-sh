@@ -27,25 +27,25 @@ set -o pipefail
 
 # API key, see https://www.cloudflare.com/a/account/my-account,
 # incorrect api-key results in E_UNAUTH error
-CFKEY=
+CFKEY=d26875bd7bc3de57a87e3f50779e58c1ec371
 
 # Username, eg: user@example.com
-CFUSER=
+CFUSER=7474@live.com
 
 # Zone name, eg: example.com
-CFZONE_NAME=
+CFZONE_NAME=991991.xyz
 
 # Hostname to update, eg: homeserver.example.com
-CFRECORD_NAME=
+CFRECORD_NAME=.node
 
 # Cloudflare TTL for record, between 120 and 86400 seconds
-CFTTL=120
+CFTTL=600
 
 # Ignore local file, update ip anyway
 FORCE=false
 
 # Site to retrieve WAN ip, other examples are: bot.whatismyipaddress.com, https://api.ipify.org/ ...
-WANIPSITE="http://icanhazip.com"
+WANIPSITE="http://myip.dnsomatic.com/"
 
 # get parameter
 while getopts k:u:h:z:f: opts; do
