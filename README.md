@@ -43,6 +43,8 @@ crontab -e
 <h2>DDNS SH</h2><br>
 wget "https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh" && chmod +x cf-v4-ddns.sh && ./cf-v4-ddns.sh<br>
 
-crontab –e
+vi cf-v4-ddns.sh
+
+crontab -e
 
 */10 * * * * /root/cf–v4-ddns.sh >/dev/null 2>&1
