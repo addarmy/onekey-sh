@@ -40,10 +40,8 @@ crontab -e
 
 */10 * * * * /usr/local/bin/cf-ddns.py >/dev/null 2>&1<br>
 
-DDNS SH<br>
-wget https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh<br>
-chmod +x cf–v4-ddns.sh<br>
-./cf–v4-ddns.sh<br>
+<h2>DDNS SH</h2><br>
+wget "https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh" && chmod +x cf-v4-ddns.sh && ./cf-v4-ddns.sh<br>
 
 crontab –e
 
