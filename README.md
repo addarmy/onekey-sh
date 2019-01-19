@@ -29,7 +29,7 @@ service sshd restart
 BBR/锐速加速<br>
 wget "https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh<br>
 
-DDNS<br>
+DDNS PY<br>
 curl https://raw.githubusercontent.com/addarmy/cloudflare_ddns/master/cf-ddns.py > /usr/local/bin/cf-ddns.py && curl https://raw.githubusercontent.com/addarmy/cloudflare_ddns/master/cf-ddns.conf > /usr/local/bin/cf-ddns.conf && chmod +x /usr/local/bin/cf-ddns.py
 
 vi /usr/local/bin/cf-ddns.conf
@@ -40,3 +40,11 @@ crontab -e
 
 */10 * * * * /usr/local/bin/cf-ddns.py >/dev/null 2>&1<br>
 
+DDNS SH<br>
+wget https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh
+chmod +x cf–v4-ddns.sh
+./cf–v4-ddns.sh
+
+crontab –e
+
+*/10 * * * * /root/cf–v4-ddns.sh >/dev/null 2>&1
