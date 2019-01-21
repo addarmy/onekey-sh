@@ -8,10 +8,6 @@ vi /root/shadowsocks/userapiconfig.py<br>
 <h2>防火墙+同步时区+DDNS+加速+ssh端口</h2>
 yum -y install wget && wget -N --no-check-certificate https://raw.githubusercontent.com/addarmy/onekey-sh/master/new.sh && chmod +x new.sh && ./new.sh<br>
 
-<h3>修改VPS时区(中国上海)+bbr加速</h3>
-查看vps时间:date<br>
-yum -y install wget && yum -y install ntpdate ntp && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ntpdate time.windows.com && wget "https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh<br>
-
 <h3>计划任务重启VPS</h3>
 安装Crontab(如果需要)<br>
 yum install vixie-cron crontabs<br>
