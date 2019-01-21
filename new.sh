@@ -37,4 +37,5 @@ vi cf-v4-ddns.sh
 ./cf-v4-ddns.sh
 vi /etc/ssh/sshd_config
 service sshd restart
+crontab -e
 ./tcp.sh
