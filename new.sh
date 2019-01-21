@@ -3,7 +3,6 @@
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 #iptables
-yum install -y iptables
 iptables -F
 iptables -X  
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
@@ -16,8 +15,6 @@ iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
 iptables -I INPUT -p tcp -m tcp --dport 9000:9999 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 9000:9999 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
-systemctl start iptables.service
-systemctl enable iptables.service
 #yum install
 yum -y install ntpdate ntp
 #同步时区
