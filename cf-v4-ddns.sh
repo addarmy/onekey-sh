@@ -39,7 +39,7 @@ CFZONE_NAME=991991.xyz
 CFRECORD_NAME=.node
 
 # Cloudflare TTL for record, between 120 and 86400 seconds
-CFTTL=600
+CFTTL=120
 
 # Ignore local file, update ip anyway
 FORCE=false
