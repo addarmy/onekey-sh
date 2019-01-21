@@ -8,8 +8,8 @@ vi /root/shadowsocks/userapiconfig.py<br>
 <h2>防火墙+同步时区+DDNS+加速+ssh端口</h2>
 yum -y install wget && wget -N --no-check-certificate https://raw.githubusercontent.com/addarmy/onekey-sh/master/new.sh && chmod +x new.sh && ./new.sh<br>
 <h2>计划任务</h2>
-*/10 * * * * root /root/cf–v4-ddns.sh
-*/30 * * * * root /root/clean-ram.sh
+*/10 * * * * root /root/cf–v4-ddns.sh<br>
+*/60 * * * * root /root/clean-ram.sh
 
 <h3>计划任务重启VPS</h3>
 安装Crontab(如果需要)<br>
