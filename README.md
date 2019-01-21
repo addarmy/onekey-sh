@@ -41,7 +41,7 @@ crontab -e
 */10 * * * * /usr/local/bin/cf-ddns.py >/dev/null 2>&1<br>
 
 <h3>DDNS SH</h3>
-wget "https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh" && chmod +x cf-v4-ddns.sh && vi cf-v4-ddns.sh
+yum -y install wget &&　wget "https://raw.githubusercontent.com/addarmy/onekey-sh/master/cf-v4-ddns.sh" && chmod +x cf-v4-ddns.sh && vi cf-v4-ddns.sh
 <br>
 
 ./cf-v4-ddns.sh
