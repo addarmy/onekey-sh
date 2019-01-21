@@ -6,7 +6,7 @@ wget "https://github.com/addarmy/onekey-sh/raw/master/node.sh" && chmod +x node.
 vi /root/shadowsocks/userapiconfig.py<br>
 
 <h2>防火墙+同步时区+DDNS+加速+ssh端口</h2>
-wget -N --no-check-certificate https://raw.githubusercontent.com/addarmy/onekey-sh/master/new.sh && chmod +x new.sh && ./new.sh<br>
+yum -y install wget && wget -N --no-check-certificate https://raw.githubusercontent.com/addarmy/onekey-sh/master/new.sh && chmod +x new.sh && ./new.sh<br>
 
 <h3>修改VPS时区(中国上海)+bbr加速</h3>
 查看vps时间:date<br>
