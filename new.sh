@@ -17,6 +17,9 @@ iptables -I INPUT -p udp -m udp --dport 9000:9999 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
 #yum install
 yum -y install ntpdate ntp
+yum install vixie-cron crontabs
+chkconfig crond on
+service crond start
 #同步时区
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate time.windows.com
