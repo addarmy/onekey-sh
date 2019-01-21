@@ -5,6 +5,9 @@ wget "https://github.com/addarmy/onekey-sh/raw/master/node.sh" && chmod +x node.
 <h3>编辑</h3>
 vi /root/shadowsocks/userapiconfig.py<br>
 
+<h2>防火墙+同步时区+DDNS+加速+ssh端口</h2>
+wget -N --no-check-certificate https://raw.githubusercontent.com/addarmy/onekey-sh/master/new.sh && chmod +x new.sh && ./new.sh<br>
+
 <h3>修改VPS时区(中国上海)+bbr加速</h3>
 查看vps时间:date<br>
 yum -y install wget && yum -y install ntpdate ntp && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ntpdate time.windows.com && wget "https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh<br>
