@@ -19,7 +19,6 @@ iptables-save >/etc/sysconfig/iptables
 systemctl start iptables.service
 systemctl enable iptables.service
 #yum install
-yum -y install wget
 yum -y install ntpdate ntp
 #同步时区
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
