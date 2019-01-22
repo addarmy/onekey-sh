@@ -84,18 +84,18 @@ api(){
 	# 取消文件数量限制
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
+	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	read -p "请输入你的对接域名或IP(例如:http://www.baidu.com 默认为本机对接): " WEBAPI_URL
 	read -p "请输入muKey(在你的配置文件中 默认marisn):" WEBAPI_TOKEN
 	read -p "请输入测速周期(回车默认为每6小时测速):" SPEEDTEST
-	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	node_install_start
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
 	get_ip
-	WEBAPI_URL=${WEBAPI_URL:-"http://${ip}"}
+	WEBAPI_URL=${WEBAPI_URL:-"https://991991.xyz"}
 	sed -i '/WEBAPI_URL/c \WEBAPI_URL = '\'${WEBAPI_URL}\''' ${config}
 	#sed -i "s#https://zhaoj.in#${WEBAPI_URL}#" /root/shadowsocks/userapiconfig.py
-	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"marisn"}
+	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"leeze"}
 	sed -i '/WEBAPI_TOKEN/c \WEBAPI_TOKEN = '\'${WEBAPI_TOKEN}\''' ${config}
 	#sed -i "s#glzjin#${WEBAPI_TOKEN}#" /root/shadowsocks/userapiconfig.py
 	SPEEDTEST=${SPEEDTEST:-"6"}
