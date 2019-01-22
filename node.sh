@@ -167,8 +167,8 @@ iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p udp --dport 443 -j ACCEPT
 iptables -I INPUT -p tcp -m tcp --dport 19920:19922 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
-iptables -I INPUT -p tcp -m tcp --dport 9000:9999 -j ACCEPT
-iptables -I INPUT -p udp -m udp --dport 9000:9999 -j ACCEPT
+iptables -I INPUT -p tcp -m tcp --dport 22:20000 -j ACCEPT
+iptables -I INPUT -p udp -m udp --dport 22:20000 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
 systemctl start iptables.service
 systemctl enable iptables.service
