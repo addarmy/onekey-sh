@@ -10,21 +10,20 @@ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p udp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p udp --dport 443 -j ACCEPT
-iptables -I INPUT -p tcp -m tcp --dport 19920:19922 -j ACCEPT
-iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
+iptables -I INPUT -p tcp -m tcp --dport 19920:19930 -j ACCEPT
+iptables -I INPUT -p udp -m udp --dport 19920:19930 -j ACCEPT
 iptables -I INPUT -p tcp -m tcp --dport 9000:9999 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 9000:9999 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
-#yum install
-yum -y install ntpdate ntp
 #安装crond
 yum install vixie-cron crontabs
 chkconfig crond on
 service crond start
-#下载清理内存SH
+#下载清理内存
 wget "https://github.com/addarmy/onekey-sh/raw/master/clean-ram.sh"
 chmod +x clean-ram.sh
 #同步时区
+yum -y install ntpdate ntp
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate time.windows.com
 #安装加速
