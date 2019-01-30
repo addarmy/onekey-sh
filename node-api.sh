@@ -1,7 +1,4 @@
 #!/bin/bash
-#注意节点名称这里，一定要按照如下的格式来填写：
-#香港 普通节点1 - 100M带宽
-#美国 VIP节点1 - 1G带宽
 #check root
 [ $(id -u) != "0" ] && { echo "错误: 您必须以root用户运行此脚本"; exit 1; }
 rm -rf node*
@@ -62,6 +59,7 @@ check_system(){
 	fi
 }
 node_install_start(){
+	timedatectl set-timezone Asia/Shanghai
 	yum -y groupinstall "Development Tools"
 	yum install unzip zip git iptables -y
 	yum update nss curl iptables -y
@@ -74,10 +72,10 @@ node_install_start(){
 	yum -y install python-setuptools
 	easy_install pip
 	git clone -b manyuser https://github.com/NimaQu/shadowsocks.git "/root/shadowsocks"
-	cd shadowsocks
+	cd /root/shadowsocks
 	pip install -r requirements.txt
 	cp apiconfig.py userapiconfig.py
-	cp config.json user-config.json
+	wget -P /root/shadowsocks https://raw.githubusercontent.com/addarmy/onekey-sh/master/user-config.json
 }
 api(){
     clear
@@ -86,9 +84,9 @@ api(){
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
 	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	read -p "请输入你的对接域名或IP(例如:https://991991.xyz): " WEBAPI_URL
-	read -p "请输入muKey(在你的配置文件中 默认leeze):" WEBAPI_TOKEN
+	read -p "请输入muKey(在你的配置文件中 默认Leeze):" WEBAPI_TOKEN
 	read -p "请输入测速周期(回车默认为每6小时测速):" SPEEDTEST
-  read -p "请输入你的单端口混淆参数后缀(默认microsoft.com): " MU_SUFFIX
+	read -p "请输入你的单端口混淆参数后缀(默认microsoft.com): " MU_SUFFIX
 	node_install_start
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
@@ -96,7 +94,7 @@ api(){
 	WEBAPI_URL=${WEBAPI_URL:-"https://991991.xyz"}
 	sed -i '/WEBAPI_URL/c \WEBAPI_URL = '\'${WEBAPI_URL}\''' ${config}
 	#sed -i "s#https://zhaoj.in#${WEBAPI_URL}#" /root/shadowsocks/userapiconfig.py
-	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"leeze"}
+	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"Leeze"}
 	sed -i '/WEBAPI_TOKEN/c \WEBAPI_TOKEN = '\'${WEBAPI_TOKEN}\''' ${config}
 	#sed -i "s#glzjin#${WEBAPI_TOKEN}#" /root/shadowsocks/userapiconfig.py
 	SPEEDTEST=${SPEEDTEST:-"6"}
@@ -160,7 +158,6 @@ esac
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 #iptables
-yum install -y iptables
 iptables -F
 iptables -X  
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
@@ -173,8 +170,6 @@ iptables -I INPUT -p udp -m udp --dport 19920:19922 -j ACCEPT
 iptables -I INPUT -p tcp -m tcp --dport 9000:9999 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 9000:9999 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
-systemctl start iptables.service
-systemctl enable iptables.service
 #开启SS
 cd /root/shadowsocks && chmod +x *.sh
 ./run.sh #后台运行shadowsocks
