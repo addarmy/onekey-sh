@@ -110,12 +110,12 @@ db(){
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
 	read -p "请输入你的对接数据库IP(例如:127.0.0.1 如果是本机请直接回车): " MYSQL_HOST
-	read -p "请输入你的数据库名称(默认sspanel):" MYSQL_DB
 	read -p "请输入你的数据库端口(默认3306):" MYSQL_PORT
+	read -p "请输入你的数据库名称(默认sspanel):" MYSQL_DB
 	read -p "请输入你的数据库用户名(默认root):" MYSQL_USER
 	read -p "请输入你的数据库密码(默认root):" MYSQL_PASS
-	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	read -p "请输入测速周期(回车默认为不测速):" SPEEDTEST
+	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	node_install_start
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
