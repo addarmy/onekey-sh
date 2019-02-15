@@ -32,8 +32,3 @@ echo "--->release memory OK ! " >>temp/memstat_$(date +%Y%m%d_%H%M%S).log
  
 fi
 fi
---------------------- 
-作者：关注今天 
-来源：CSDN 
-原文：https://blog.csdn.net/u011159417/article/details/78141409 
-版权声明：本文为博主原创文章，转载请附上博文链接！
