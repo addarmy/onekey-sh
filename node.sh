@@ -65,8 +65,8 @@ node_install_start(){
 	yum -y groupinstall "Development Tools"
 	yum install unzip zip git iptables -y
 	yum update nss curl iptables -y
-	wget --no-check-certificate https://download.libsodium.org/libsodium/releases/libsodium-1.0.16.tar.gz
-	tar xf libsodium-1.0.16.tar.gz && cd libsodium-1.0.16
+	wget --no-check-certificate https://download.libsodium.org/libsodium/releases/libsodium-1.0.17.tar.gz
+	tar xf libsodium-1.0.17.tar.gz && cd libsodium-1.0.17
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	ldconfig
@@ -78,7 +78,7 @@ node_install_start(){
 	pip install -r requirements.txt
 	pip install cymysql
 	cp apiconfig.py userapiconfig.py
-	cp config.json user-config.json
+	wget -P /root/shadowsocks https://raw.githubusercontent.com/addarmy/onekey-sh/master/user-config.json
 }
 api(){
     clear
@@ -87,7 +87,6 @@ api(){
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
 	read -p "请输入你的对接域名或IP(例如:http://www.baidu.com 默认为本机对接): " WEBAPI_URL
 	read -p "请输入muKey(在你的配置文件中 默认marisn):" WEBAPI_TOKEN
-	read -p "请输入测速周期(回车默认为不测速):" SPEEDTEST
 	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	node_install_start
 	cd /root/shadowsocks
@@ -96,36 +95,35 @@ api(){
 	WEBAPI_URL=${WEBAPI_URL:-"http://${ip}"}
 	sed -i '/WEBAPI_URL/c \WEBAPI_URL = '\'${WEBAPI_URL}\''' ${config}
 	#sed -i "s#https://zhaoj.in#${WEBAPI_URL}#" /root/shadowsocks/userapiconfig.py
-	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"marisn"}
+	WEBAPI_TOKEN=${WEBAPI_TOKEN:-"Leeze"}
 	sed -i '/WEBAPI_TOKEN/c \WEBAPI_TOKEN = '\'${WEBAPI_TOKEN}\''' ${config}
 	#sed -i "s#glzjin#${WEBAPI_TOKEN}#" /root/shadowsocks/userapiconfig.py
 	SPEEDTEST=${SPEEDTEST:-"0"}
 	sed -i '/SPEED/c \SPEEDTEST = '${SPEEDTEST}'' ${config}
 	NODE_ID=${NODE_ID:-"3"}
 	sed -i '/NODE_ID/c \NODE_ID = '${NODE_ID}'' ${config}
+	MU_SUFFIX=${MU_SUFFIX:-"microsoft.com"}
+	sed -i '/MU_SUFFIX/c \MU_SUFFIX = '${MU_SUFFIX}'' ${config}
+	MU_REGEX=${MU_REGEX:-"%5m%id.%suffix"}
+	sed -i '/MU_REGEX/c \MU_REGEX = '${MU_REGEX}'' ${config}
 }
 db(){
     clear
 	# 取消文件数量限制
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
 	echo -e "如果以下手动配置错误，请在${config}手动编辑修改"
-	read -p "请输入你的对接数据库IP(例如:127.0.0.1 如果是本机请直接回车): " MYSQL_HOST
-	read -p "请输入你的数据库端口(默认3306):" MYSQL_PORT
-	read -p "请输入你的数据库名称(默认sspanel):" MYSQL_DB
-	read -p "请输入你的数据库用户名(默认root):" MYSQL_USER
 	read -p "请输入你的数据库密码(默认root):" MYSQL_PASS
-	read -p "请输入测速周期(回车默认为不测速):" SPEEDTEST
 	read -p "请输入你的节点编号(回车默认为节点ID 3):  " NODE_ID
 	node_install_start
 	cd /root/shadowsocks
 	echo -e "modify Config.py...\n"
 	get_ip
 	sed -i '/API_INTERFACE/c \API_INTERFACE = '\'glzjinmod\''' ${config}
-	MYSQL_HOST=${MYSQL_HOST:-"${ip}"}
+	MYSQL_HOST=${MYSQL_HOST:-"sql.130130.xyz"}
 	sed -i '/MYSQL_HOST/c \MYSQL_HOST = '\'${MYSQL_HOST}\''' ${config}
-	MYSQL_DB=${MYSQL_DB:-"sspanel"}
+	MYSQL_DB=${MYSQL_DB:-"uuyun"}
 	sed -i '/MYSQL_DB/c \MYSQL_DB = '\'${MYSQL_DB}\''' ${config}
-	MYSQL_USER=${MYSQL_USER:-"root"}
+	MYSQL_USER=${MYSQL_USER:-"uuyun"}
 	sed -i '/MYSQL_USER/c \MYSQL_USER = '\'${MYSQL_USER}\''' ${config}
 	MYSQL_PASS=${MYSQL_PASS:-"root"}
 	sed -i '/MYSQL_PASS/c \MYSQL_PASS = '\'${MYSQL_PASS}\''' ${config}
@@ -135,6 +133,10 @@ db(){
 	sed -i '/NODE_ID/c \NODE_ID = '${NODE_ID}'' ${config}
 	SPEEDTEST=${SPEEDTEST:-"0"}
 	sed -i '/SPEEDTEST/c \SPEEDTEST = '${SPEEDTEST}'' ${config}
+	MU_SUFFIX=${MU_SUFFIX:-"microsoft.com"}
+	sed -i '/MU_SUFFIX/c \MU_SUFFIX = '${MU_SUFFIX}'' ${config}
+	MU_REGEX=${MU_REGEX:-"%5m%id.%suffix"}
+	sed -i '/MU_REGEX/c \MU_REGEX = '${MU_REGEX}'' ${config}
 }
 clear
 check_system
@@ -164,8 +166,10 @@ iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 22:65535 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
 #开启SS
-cd /root/shadowsocks && chmod +x *.sh
-./run.sh #后台运行shadowsocks
+cp -r /root/shadowsocks/ssr.service /etc/systemd/system/
+systemctl start ssr
+systemctl enable ssr
+echo "sshd: ALL" > /etc/hosts.allow
 echo 'iptables-restore /etc/sysconfig/iptables' >> /etc/rc.local
 echo 'bash /root/shadowsocks/run.sh' >> /etc/rc.local
 chmod +x /etc/rc.d/rc.local && chmod +x /etc/rc.local
