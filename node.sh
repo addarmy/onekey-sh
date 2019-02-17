@@ -166,10 +166,8 @@ iptables -I INPUT -p tcp -m tcp --dport 22:65535 -j ACCEPT
 iptables -I INPUT -p udp -m udp --dport 22:65535 -j ACCEPT
 iptables-save >/etc/sysconfig/iptables
 #开启SS
-cp -r /root/shadowsocks/ssr.service /etc/systemd/system/
-systemctl start ssr
-systemctl enable ssr
-echo "sshd: ALL" > /etc/hosts.allow
+cd /root/shadowsocks && chmod +x *.sh
+./run.sh #后台运行shadowsocks
 echo 'iptables-restore /etc/sysconfig/iptables' >> /etc/rc.local
 echo 'bash /root/shadowsocks/run.sh' >> /etc/rc.local
 chmod +x /etc/rc.d/rc.local && chmod +x /etc/rc.local
