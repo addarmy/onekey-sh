@@ -15,7 +15,7 @@ start()
 {
     echo "Start ServerStatus"
     cd "$ServerStatus_DATA"
-    nobup ./sergate --config=config.json --web-dir="$WEB_DATA" $
+    screen -dmS web ./sergate --config=config.json --web-dir="$WEB_DATA"
 }
 
 case "$1" in
