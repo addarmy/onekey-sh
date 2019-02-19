@@ -1,0 +1,35 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: ServerStatus
+# Required-Start: $network $syslog
+# Required-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start ServerStatus
+# Description: ServerStatus
+### END INIT INFO
+ServerStatus_DATA="/root/ServerStatus/server"
+WEB_DATA="/www/wwwroot/status"
+
+start()
+{
+    echo "Start ServerStatus"
+    cd "$ServerStatus_DATA"
+    screen -dmS web ./sergate --config=config.json --web-dir="$WEB_DATA"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        #start
+        ;;
+    *)
+        echo "Usage: /etc/init.d/status-s {start|stop|restart}"
+        ;;
+esac
