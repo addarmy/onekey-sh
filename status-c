@@ -15,7 +15,7 @@ start()
 {
     echo "Start ServerStatus Clients"
     cd "${ServerStatusC_DATA}"
-    nobup python "${NAME_BIN}" $
+    screen -dmS jp python "${NAME_BIN}"
 }
 
 case "$1" in
