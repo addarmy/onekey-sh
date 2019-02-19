@@ -1,0 +1,35 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: Status Clients
+# Required-Start: $network $syslog
+# Required-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start ServerStatus Clients
+# Description: Status Clients
+### END INIT INFO
+ServerStatusC_DATA="/root/ServerStatus/clients"
+NAME_BIN="client-linux.py"
+
+start()
+{
+    echo "Start ServerStatus Clients"
+    cd "${ServerStatusC_DATA}"
+    screen -dmS jp python "${NAME_BIN}"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        #start
+        ;;
+    *)
+        echo "Usage: /etc/init.d/status-c {start|stop|restart}"
+        ;;
+esac
