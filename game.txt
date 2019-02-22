@@ -3,16 +3,7 @@ youtube
 youtu
 twitter
 netflix
-www.
-.zip
-.7z
-.rar
-.mp4
-.mp3
-.mov
-.avi
 baidu
-360
 youku
 qq.com
 facebook
