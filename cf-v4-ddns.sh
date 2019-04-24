@@ -45,7 +45,7 @@ CFTTL=120
 FORCE=false
 
 # Site to retrieve WAN ip, other examples are: bot.whatismyipaddress.com, https://api.ipify.org/ ...
-WANIPSITE="icanhazip.com"
+WANIPSITE="ipv4.ip.sb"
 
 # get parameter
 while getopts k:u:h:z:f: opts; do
