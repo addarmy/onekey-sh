@@ -1,5 +1,5 @@
 !/bin/sh
 service iptables restart
-ddnsip=ping -c1 xxx.ddns.com|awk -F'[(|)]' 'NR==1{print $2}'
+ddnsip=ping -c1 401.node.991991.xyz|awk -F'[(|)]' 'NR==1{print $2}'
 iptables -t nat -A PREROUTING -p tcp -m tcp --dport 19490 -j DNAT --to-destination $ddnsip:19490
 iptables -t nat -A PREROUTING -p udp -m udp --dport 19490 -j DNAT --to-destination $ddnsip:19490
