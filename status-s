@@ -9,7 +9,7 @@
 # Description: ServerStatus
 ### END INIT INFO
 ServerStatus_DATA="/root/ServerStatus/server"
-WEB_DATA="/root/ServerStatus/web"
+WEB_DATA="/www/wwwroot/tz.leeze.cn"
 
 start()
 {
