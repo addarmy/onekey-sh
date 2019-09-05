@@ -21,11 +21,11 @@ WEBAPI_TOKEN = 'Leeze'
 MUDB_FILE = 'mudb.json'
 
 # Mysql
-MYSQL_HOST = '127.0.0.1'
+MYSQL_HOST = 'sql.130130.xyz'
 MYSQL_PORT = 3306
-MYSQL_USER = 'ss'
-MYSQL_PASS = 'ss'
-MYSQL_DB = 'shadowsocks'
+MYSQL_USER = 'uuyun'
+MYSQL_PASS = 'uuyun'
+MYSQL_DB = 'uuyun'
 
 MYSQL_SSL_ENABLE = 0
 MYSQL_SSL_CA = ''
